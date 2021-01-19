@@ -21,7 +21,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", validateAccountId, async (req, res, next) => {
   try {
     const accountData = await Account.getById(req.params.id);
     res.status(200).json(accountData);
@@ -38,5 +38,39 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const updatedAccountBody = await Account.update(req.params.id, req.body);
+    res.status(200).json(updatedAccountBody);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/:id", validateAccountId, async (req, res, next) => {
+  try {
+    const deletedAccount = await Account.remove(req.params.id);
+    res.status(200).json({ message: "the account has been deleted" });
+  } catch (error) {
+    next(error);
+  }
+});
+
+async function validateAccountId(req, res, next) {
+  try {
+    const account = await Accounts.getById(req.params.id);
+    if (account) {
+      req.account = account;
+      next();
+    } else {
+      res
+        .status(404)
+        .json({ message: `Account with id ${req.params.id} not found` });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Bad Request" });
+  }
+}
 
 module.exports = router;
