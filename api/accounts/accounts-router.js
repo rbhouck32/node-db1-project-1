@@ -1,18 +1,10 @@
 const express = require("express");
-const { restart } = require("nodemon");
 
 const Account = require("./accounts-model.js");
 
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
-  //   Account.get()
-  //     .then((account) => {
-  //       res.status(200).json(account);
-  //     })
-  //     .catch((error) => {
-  //       res.status(400).json({ message: error });
-  //     });
   try {
     const accountData = await Account.get();
     res.status(200).json(accountData);
@@ -56,21 +48,5 @@ router.delete("/:id", validateAccountId, async (req, res, next) => {
     next(error);
   }
 });
-
-// async function validateAccountId(req, res, next) {
-//   try {
-//     const account = await Accounts.getById(req.params.id);
-//     if (account) {
-//       req.account = account;
-//       next();
-//     } else {
-//       res
-//         .status(404)
-//         .json({ message: `Account with id ${req.params.id} not found` });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: "Bad Request" });
-//   }
-// }
 
 module.exports = router;
