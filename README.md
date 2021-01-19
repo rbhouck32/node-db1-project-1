@@ -28,16 +28,38 @@ Visit [SQL Try Editor at W3Schools.com](https://www.w3schools.com/Sql/trysql.asp
 <!-- SELECT * FROM Customers WHERE PostalCode = 1010; -->
 
 - find the phone number for the supplier with the id 11.
+ Should be (010) 9984510.
 
-<!-- Should be (010) 9984510.
-SELECT PHONE
+<!-- SELECT PHONE
 FROM SUPPLIERS
-WHERE SupplierID = 11 -->
+WHERE SupplierID = 11 --> 
 
 - list first 10 orders placed, sorted descending by the order date. The order with date 1997-02-12 should be at the top.
+
+<!-- SELECT * FROM ORDERS
+ORDER BY ORDERDATE DESC
+LIMIT 10; -->
+
+        
+
+
 - find all customers that live in London, Madrid, or Brazil. Returns 18 records.
+
+<!-- SELECT * FROM customers 
+WHERE CITY IN ('London', 'Madrid') 
+OR COUNTRY = 'Brazil' -->
+
+
+
 - add a customer record for _"The Shire"_, the contact name is _"Bilbo Baggins"_ the address is _"1 Hobbit-Hole"_ in _"Bag End"_, postal code _"111"_ and the country is _"Middle Earth"_.
+
+<!-- INSERT INTO CUSTOMERS (CustomerName, ContactName, Address, City, PostalCode, Country) 
+VALUES ('The Shire', 'Bilbo Baggins', '1 Hobbit-Hole', 'Bag End', '111', 'Middle Earth') -->
+
 - update _Bilbo Baggins_ record so that the postal code changes to _"11122"_.
+
+<!-- UPDATE CustomerName SET PostalCode = '11122'
+WHERE CustomerID = 92 -->
 
 **Clicking the `Restore Database` button in the page will repopulate the database with the original data and discard all changes you have made**.
 

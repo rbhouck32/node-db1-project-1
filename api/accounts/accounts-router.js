@@ -57,20 +57,20 @@ router.delete("/:id", validateAccountId, async (req, res, next) => {
   }
 });
 
-async function validateAccountId(req, res, next) {
-  try {
-    const account = await Accounts.getById(req.params.id);
-    if (account) {
-      req.account = account;
-      next();
-    } else {
-      res
-        .status(404)
-        .json({ message: `Account with id ${req.params.id} not found` });
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Bad Request" });
-  }
-}
+// async function validateAccountId(req, res, next) {
+//   try {
+//     const account = await Accounts.getById(req.params.id);
+//     if (account) {
+//       req.account = account;
+//       next();
+//     } else {
+//       res
+//         .status(404)
+//         .json({ message: `Account with id ${req.params.id} not found` });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: "Bad Request" });
+//   }
+// }
 
 module.exports = router;

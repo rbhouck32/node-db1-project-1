@@ -24,10 +24,10 @@ function add(account) {
     });
 }
 
-function update(id, account) {
+function update(id, accountBody) {
   // UPDATE accounts SET name = 'foo', budget = 'bar' WHERE id = 1;
   return db("accounts")
-    .update(account)
+    .update(accountBody)
     .where("id", id)
     .then(() => {
       return getById(id);
